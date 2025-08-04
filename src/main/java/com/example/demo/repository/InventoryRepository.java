@@ -9,7 +9,10 @@ import java.util.List;
 
 @Repository
 public interface InventoryRepository extends JpaRepository<Inventory, Integer> {
-
+   
+ 
+    @Query("SELECT i FROM Inventory i JOIN i.supplier s ORDER BY s.name ASC, i.description ASC")
+    List<Inventory> supplierSortInventorySort();
  
     @Query("SELECT i FROM Inventory i JOIN i.supplier s ORDER BY s.name ASC")
     List<Inventory> sortBySupplierName();
@@ -17,8 +20,7 @@ public interface InventoryRepository extends JpaRepository<Inventory, Integer> {
     @Query("SELECT i FROM Inventory i JOIN i.supplier s ORDER BY s.id ASC")
     List<Inventory> sortBySupplierId();
 
-    @Query("SELECT i FROM Inventory i JOIN i.supplier s ORDER BY s.name ASC, i.description ASC")
-    List<Inventory> supplierSortInventorySort();
+
     
     //named query
     @Query(name = "Inventory.sortByCategoryId")
@@ -30,3 +32,4 @@ public interface InventoryRepository extends JpaRepository<Inventory, Integer> {
     List<Inventory> sortByTypeNameNative();
 
 }
+
