@@ -12,7 +12,13 @@ public class InventoryController {
 
     @Autowired
     private InventoryRepository inventoryRepository;
-    
+
+
+    @GetMapping("/sortedWithSupplierName&InventoryDescrip")
+    public List<Inventory> getSorted() {
+        return inventoryRepository.supplierSortInventorySort();
+    }
+
     @GetMapping("/sortBySupplierName")
     public List<Inventory> getSortedBySupplierName() {
         return inventoryRepository.sortBySupplierName();
@@ -23,10 +29,6 @@ public class InventoryController {
         return inventoryRepository.sortBySupplierId();
     }
 
-    @GetMapping("/sorted")
-    public List<Inventory> getSorted() {
-        return inventoryRepository.supplierSortInventorySort();
-    }
 
     
     //named query
@@ -43,3 +45,4 @@ public class InventoryController {
         return inventoryRepository.sortByTypeNameNative();
     }
 }
+
